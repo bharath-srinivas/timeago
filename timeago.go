@@ -60,7 +60,7 @@ var English = Config{
 		{time.Second, "about a second", "%d seconds"},
 		{time.Minute, "about a minute", "%d minutes"},
 		{time.Hour, "about an hour", "%d hours"},
-		{Day, "one day", "%d days"},
+		{Day, "yesterday", "%d days"},
 		{Month, "one month", "%d months"},
 		{Year, "one year", "%d years"},
 	},
@@ -250,6 +250,10 @@ func (cfg Config) FormatRelativeDuration(d time.Duration) string {
 	}
 
 	s, _ := cfg.getTimeText(d, true)
+
+	if s == "yesterday" {
+		return s
+	}
 
 	if isPast {
 		return strings.Join([]string{cfg.PastPrefix, s, cfg.PastSuffix}, "")
