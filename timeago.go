@@ -16,9 +16,12 @@ import (
 )
 
 const (
-	Day   time.Duration = time.Hour * 24
-	Month time.Duration = Day * 30
-	Year  time.Duration = Day * 365
+	Day = time.Hour * 24
+)
+
+var (
+	Month = Day * getDaysInMonth()
+	Year  = Day * getDaysInYear()
 )
 
 type FormatPeriod struct {
@@ -54,12 +57,12 @@ var English = Config{
 	FutureSuffix: "",
 
 	Periods: []FormatPeriod{
-		FormatPeriod{time.Second, "about a second", "%d seconds"},
-		FormatPeriod{time.Minute, "about a minute", "%d minutes"},
-		FormatPeriod{time.Hour, "about an hour", "%d hours"},
-		FormatPeriod{Day, "one day", "%d days"},
-		FormatPeriod{Month, "one month", "%d months"},
-		FormatPeriod{Year, "one year", "%d years"},
+		{time.Second, "about a second", "%d seconds"},
+		{time.Minute, "about a minute", "%d minutes"},
+		{time.Hour, "about an hour", "%d hours"},
+		{Day, "one day", "%d days"},
+		{Month, "one month", "%d months"},
+		{Year, "one year", "%d years"},
 	},
 
 	Zero: "about a second",
@@ -75,12 +78,12 @@ var Portuguese = Config{
 	FutureSuffix: "",
 
 	Periods: []FormatPeriod{
-		FormatPeriod{time.Second, "um segundo", "%d segundos"},
-		FormatPeriod{time.Minute, "um minuto", "%d minutos"},
-		FormatPeriod{time.Hour, "uma hora", "%d horas"},
-		FormatPeriod{Day, "um dia", "%d dias"},
-		FormatPeriod{Month, "um mês", "%d meses"},
-		FormatPeriod{Year, "um ano", "%d anos"},
+		{time.Second, "um segundo", "%d segundos"},
+		{time.Minute, "um minuto", "%d minutos"},
+		{time.Hour, "uma hora", "%d horas"},
+		{Day, "um dia", "%d dias"},
+		{Month, "um mês", "%d meses"},
+		{Year, "um ano", "%d anos"},
 	},
 
 	Zero: "menos de um segundo",
@@ -96,12 +99,12 @@ var Chinese = Config{
 	FutureSuffix: "",
 
 	Periods: []FormatPeriod{
-		FormatPeriod{time.Second, "1 秒", "%d 秒"},
-		FormatPeriod{time.Minute, "1 分钟", "%d 分钟"},
-		FormatPeriod{time.Hour, "1 小时", "%d 小时"},
-		FormatPeriod{Day, "1 天", "%d 天"},
-		FormatPeriod{Month, "1 月", "%d 月"},
-		FormatPeriod{Year, "1 年", "%d 年"},
+		{time.Second, "1 秒", "%d 秒"},
+		{time.Minute, "1 分钟", "%d 分钟"},
+		{time.Hour, "1 小时", "%d 小时"},
+		{Day, "1 天", "%d 天"},
+		{Month, "1 月", "%d 月"},
+		{Year, "1 年", "%d 年"},
 	},
 
 	Zero: "1 秒",
@@ -118,12 +121,12 @@ var French = Config{
 	FutureSuffix: "",
 
 	Periods: []FormatPeriod{
-		FormatPeriod{time.Second, "environ une seconde", "moins d'une minute"},
-		FormatPeriod{time.Minute, "environ une minute", "%d minutes"},
-		FormatPeriod{time.Hour, "environ une heure", "%d heures"},
-		FormatPeriod{Day, "un jour", "%d jours"},
-		FormatPeriod{Month, "un mois", "%d mois"},
-		FormatPeriod{Year, "un an", "%d ans"},
+		{time.Second, "environ une seconde", "moins d'une minute"},
+		{time.Minute, "environ une minute", "%d minutes"},
+		{time.Hour, "environ une heure", "%d heures"},
+		{Day, "un jour", "%d jours"},
+		{Month, "un mois", "%d mois"},
+		{Year, "un an", "%d ans"},
 	},
 
 	Zero: "environ une seconde",
@@ -140,12 +143,12 @@ var German = Config{
 	FutureSuffix: "",
 
 	Periods: []FormatPeriod{
-		FormatPeriod{time.Second, "einer Sekunde", "%d Sekunden"},
-		FormatPeriod{time.Minute, "einer Minute", "%d Minuten"},
-		FormatPeriod{time.Hour, "einer Stunde", "%d Stunden"},
-		FormatPeriod{Day, "einem Tag", "%d Tagen"},
-		FormatPeriod{Month, "einem Monat", "%d Monaten"},
-		FormatPeriod{Year, "einem Jahr", "%d Jahren"},
+		{time.Second, "einer Sekunde", "%d Sekunden"},
+		{time.Minute, "einer Minute", "%d Minuten"},
+		{time.Hour, "einer Stunde", "%d Stunden"},
+		{Day, "einem Tag", "%d Tagen"},
+		{Month, "einem Monat", "%d Monaten"},
+		{Year, "einem Jahr", "%d Jahren"},
 	},
 
 	Zero: "einer Sekunde",
@@ -162,12 +165,12 @@ var Turkish = Config{
 	FutureSuffix: " içinde",
 
 	Periods: []FormatPeriod{
-		FormatPeriod{time.Second, "yaklaşık bir saniye", "%d saniye"},
-		FormatPeriod{time.Minute, "yaklaşık bir dakika", "%d dakika"},
-		FormatPeriod{time.Hour, "yaklaşık bir saat", "%d saat"},
-		FormatPeriod{Day, "bir gün", "%d gün"},
-		FormatPeriod{Month, "bir ay", "%d ay"},
-		FormatPeriod{Year, "bir yıl", "%d yıl"},
+		{time.Second, "yaklaşık bir saniye", "%d saniye"},
+		{time.Minute, "yaklaşık bir dakika", "%d dakika"},
+		{time.Hour, "yaklaşık bir saat", "%d saat"},
+		{Day, "bir gün", "%d gün"},
+		{Month, "bir ay", "%d ay"},
+		{Year, "bir yıl", "%d yıl"},
 	},
 
 	Zero: "yaklaşık bir saniye",
@@ -184,12 +187,12 @@ var Korean = Config{
 	FutureSuffix: " 후",
 
 	Periods: []FormatPeriod{
-		FormatPeriod{time.Second, "약 1초", "%d초"},
-		FormatPeriod{time.Minute, "약 1분", "%d분"},
-		FormatPeriod{time.Hour, "약 한시간", "%d시간"},
-		FormatPeriod{Day, "하루", "%d일"},
-		FormatPeriod{Month, "1개월", "%d개월"},
-		FormatPeriod{Year, "1년", "%d년"},
+		{time.Second, "약 1초", "%d초"},
+		{time.Minute, "약 1분", "%d분"},
+		{time.Hour, "약 한시간", "%d시간"},
+		{Day, "하루", "%d일"},
+		{Month, "1개월", "%d개월"},
+		{Year, "1년", "%d년"},
 	},
 
 	Zero: "방금",
@@ -198,6 +201,24 @@ var Korean = Config{
 	DefaultLayout: "2006-01-02",
 }
 
+func getDaysInMonth() time.Duration {
+	t := time.Now().UTC()
+	year := t.Year()
+	month := (t.Month() + 1) % 12
+	if month == 12 {
+		year += 1
+	}
+	t1 := time.Date(year, month, 0, 0, 0, 0, 0, time.UTC)
+	return time.Duration(t1.Day())
+}
+
+func getDaysInYear() time.Duration {
+	t := time.Now().UTC()
+	t1 := time.Date(t.Year(), 1, 1, 0, 0, 0, 0, time.UTC)
+	t2 := time.Date(t.Year()+1, 1, 1, 0, 0, 0, 0, time.UTC)
+	days := t2.Sub(t1).Hours() / 24
+	return time.Duration(days)
+}
 
 //Format returns a textual representation of the time value formatted according to the layout
 //defined in the Config. The time is compared to time.Now() and is then formatted as a fuzzy
